@@ -1,37 +1,37 @@
 import {Routes} from '@angular/router';
-import {authGuard, publicGuard} from './auth.guard';
+import {authGuard, publicGuard} from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: 'login',
     canActivate: [publicGuard],
-    loadComponent: () => import('./login.component').then(m => m.LoginComponent)
+    loadComponent: () => import('./features/auth/components/login/login.component').then(m => m.LoginComponent)
   },
   {
     path: 'register',
     canActivate: [publicGuard],
-    loadComponent: () => import('./register.component').then(m => m.RegisterComponent)
+    loadComponent: () => import('./features/auth/components/register/register.component').then(m => m.RegisterComponent)
   },
   {
     path: '',
     canActivate: [authGuard],
-    loadComponent: () => import('./tabs.component').then(m => m.TabsComponent),
+    loadComponent: () => import('./shared/components/tabs/tabs.component').then(m => m.TabsComponent),
     children: [
       {
         path: 'home',
-        loadComponent: () => import('./home.component').then(m => m.HomeComponent)
+        loadComponent: () => import('./features/home/components/home/home.component').then(m => m.HomeComponent)
       },
       {
         path: 'wallet',
-        loadComponent: () => import('./wallet.component').then(m => m.WalletComponent)
+        loadComponent: () => import('./features/wallet/components/wallet/wallet.component').then(m => m.WalletComponent)
       },
       {
         path: 'purchases',
-        loadComponent: () => import('./purchases.component').then(m => m.PurchasesComponent)
+        loadComponent: () => import('./features/purchases/components/purchases/purchases.component').then(m => m.PurchasesComponent)
       },
       {
         path: 'profile',
-        loadComponent: () => import('./profile.component').then(m => m.ProfileComponent)
+        loadComponent: () => import('./features/profile/components/profile/profile.component').then(m => m.ProfileComponent)
       },
       {
         path: '',
@@ -43,6 +43,6 @@ export const routes: Routes = [
   {
     path: 'shop/:id',
     canActivate: [authGuard],
-    loadComponent: () => import('./shop-detail.component').then(m => m.ShopDetailComponent)
+    loadComponent: () => import('./features/shop/components/shop-detail/shop-detail.component').then(m => m.ShopDetailComponent)
   }
 ];
