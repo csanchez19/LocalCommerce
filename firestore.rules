@@ -1,0 +1,95 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+          (request.auth.token.email == "csanchez@codigitalab.com" && request.auth.token.email_verified == true));
+    }
+    
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+    
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    // ===============================================================
+    // Domain Validators
+    // ===============================================================
+    
+    function isValidUser(data) {
+      return hasOnlyAllowedFields(['uid', 'email', 'displayName', 'role', 'points', 'createdAt']) &&
+             data.uid is string && data.uid.size() > 0 && data.uid.size() < 128 &&
+             data.email is string && isValidEmail(data.email) &&
+             (!('displayName' in data) || (data.displayName is string && data.displayName.size() <= 100)) &&
+             data.role in ['user', 'admin'] &&
+             data.points is number && data.points >= 0 &&
+             data.createdAt is timestamp;
+    }
+    
+    function isValidPurchase(data) {
+      return hasOnlyAllowedFields(['userId', 'shopId', 'shopName', 'amount', 'points', 'date']) &&
+             data.userId is string && data.userId.size() > 0 && data.userId.size() < 128 &&
+             data.shopId is string && data.shopId.size() > 0 && data.shopId.size() < 128 &&
+             data.shopName is string && data.shopName.size() > 0 && data.shopName.size() < 100 &&
+             data.amount is number && data.amount >= 0 &&
+             data.points is number && data.points >= 0 &&
+             data.date is timestamp;
+    }
+
+    function isValidShop(data) {
+      return hasOnlyAllowedFields(['name', 'address', 'rating', 'image']) &&
+             data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.address is string && data.address.size() > 0 && data.address.size() < 200 &&
+             data.rating is number && data.rating >= 0 && data.rating <= 5 &&
+             data.image is string && data.image.size() > 0 && data.image.size() < 1000;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isAuthenticated() && isOwner(userId) && isValidUser(request.resource.data) && 
+                    request.resource.data.uid == userId &&
+                    ((request.resource.data.role == 'user') || isAdmin());
+      allow update: if isAuthenticated() && isOwner(userId) && isValidUser(request.resource.data) &&
+                    request.resource.data.uid == resource.data.uid &&
+                    request.resource.data.createdAt == resource.data.createdAt &&
+                    ((request.resource.data.role == resource.data.role) || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    match /purchases/{purchaseId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && isValidPurchase(request.resource.data) && 
+                    request.resource.data.userId == request.auth.uid;
+      allow update: if isAdmin() && isValidPurchase(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    match /shops/{shopId} {
+      allow read: if isAuthenticated();
+      allow create: if isAdmin() && isValidShop(request.resource.data);
+      allow update: if isAdmin() && isValidShop(request.resource.data);
+      allow delete: if isAdmin();
+    }
+  }
+}

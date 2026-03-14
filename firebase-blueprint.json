@@ -1,0 +1,58 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user of the application",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "User ID" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "points": { "type": "number", "description": "Total accumulated points" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role", "points", "createdAt"]
+    },
+    "Purchase": {
+      "title": "Purchase",
+      "description": "A purchase made by a user at a shop",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "ID of the user who made the purchase" },
+        "shopId": { "type": "string", "description": "ID of the shop" },
+        "shopName": { "type": "string" },
+        "amount": { "type": "number" },
+        "points": { "type": "number" },
+        "date": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "shopId", "shopName", "amount", "points", "date"]
+    },
+    "Shop": {
+      "title": "Shop",
+      "description": "A participating shop",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "address": { "type": "string" },
+        "rating": { "type": "number" },
+        "image": { "type": "string" }
+      },
+      "required": ["name", "address", "rating", "image"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles"
+    },
+    "/purchases/{purchaseId}": {
+      "schema": { "$ref": "#/entities/Purchase" },
+      "description": "Purchases made by users"
+    },
+    "/shops/{shopId}": {
+      "schema": { "$ref": "#/entities/Shop" },
+      "description": "List of shops"
+    }
+  }
+}
