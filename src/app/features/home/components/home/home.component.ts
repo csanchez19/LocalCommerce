@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonContent, IonIcon, IonChip } from '@ionic/angular/standalone';
+import { IonContent, IonIcon, IonChip, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { notificationsOutline, searchOutline, locationOutline, star, heartOutline } from 'ionicons/icons';
 import { RouterLink } from '@angular/router';
@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, IonContent, IonIcon, IonChip, RouterLink],
+  imports: [CommonModule, IonContent, IonIcon, IonChip, IonLabel, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
