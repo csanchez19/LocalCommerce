@@ -1,26 +1,29 @@
-<ion-content class="bg-slate-50">
-  <div class="max-w-md mx-auto min-h-screen pb-20 bg-white shadow-xl relative">
+<ion-content class="bg-white">
+  <div class="min-h-screen pb-24 relative">
     <header class="p-6 pb-2">
       <div class="flex justify-between items-center mb-6">
         <h1 class="text-3xl font-bold tracking-tight text-slate-800">Explora tu <span class="text-primary">Municipio</span></h1>
-        <button class="p-2 bg-slate-100 rounded-custom">
+        <button class="p-3 bg-slate-100 rounded-full shadow-sm hover:bg-slate-200 transition-all active:scale-95">
           <ion-icon name="notifications-outline" class="text-xl text-slate-600"></ion-icon>
         </button>
       </div>
 
       <div class="relative mb-6">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-4">
           <ion-icon name="search-outline" class="text-slate-400 text-xl"></ion-icon>
         </span>
-        <input class="w-full pl-10 pr-4 py-3 bg-slate-50 border-none rounded-custom focus:ring-2 focus:ring-primary focus:bg-white transition-all text-sm shadow-sm" placeholder="¿Qué estás buscando hoy?" type="text"/>
+        <input class="w-full pl-12 pr-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-full focus:ring-4 focus:ring-primary/20 focus:bg-white focus:border-primary transition-all text-sm shadow-sm" placeholder="¿Qué estás buscando hoy?" type="text"/>
       </div>
 
-      <div class="flex space-x-4 overflow-x-auto hide-scrollbar pb-2">
+      <div class="flex space-x-3 overflow-x-auto hide-scrollbar pb-3 px-1">
         @for (cat of categories(); track cat.name) {
           <button 
-            class="flex-shrink-0 px-5 py-2 font-semibold rounded-custom text-sm transition-colors"
-            [ngClass]="cat.active ? 'bg-primary text-slate-900 shadow-md' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'">
-            {{ cat.icon }} {{ cat.name }}
+            class="flex-shrink-0 px-6 py-2.5 font-bold rounded-full text-sm transition-all duration-300 border-2"
+            [ngClass]="cat.active 
+              ? 'bg-primary border-primary text-slate-900 shadow-lg scale-105' 
+              : 'bg-white border-slate-100 text-slate-500 hover:border-primary hover:text-primary'">
+            <span class="mr-2 text-base">{{ cat.icon }}</span>
+            {{ cat.name }}
           </button>
         }
       </div>
@@ -36,7 +39,7 @@
               <span class="text-xs font-bold">{{ business.rating }}</span>
             </div>
             <div class="absolute bottom-3 left-3">
-              <span class="bg-primary px-3 py-1 rounded-custom text-[10px] font-bold uppercase tracking-wider text-slate-900 shadow-sm">Loyalty Badge</span>
+              <span class="bg-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-slate-900 shadow-sm border border-white/20">Loyalty Badge</span>
             </div>
           </div>
           <div class="p-4">
@@ -48,7 +51,7 @@
                   {{ business.address }} • {{ business.distance }} km
                 </p>
               </div>
-              <button class="p-2 rounded-full bg-slate-50 text-slate-400">
+              <button class="p-3 rounded-full bg-slate-50 text-slate-400 hover:text-red-500 hover:bg-red-50 transition-all active:scale-90">
                 <ion-icon name="heart-outline" class="text-xl"></ion-icon>
               </button>
             </div>

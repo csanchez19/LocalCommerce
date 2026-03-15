@@ -1,11 +1,11 @@
-<ion-content class="bg-slate-50">
-  <main class="max-w-md mx-auto bg-white min-h-screen relative shadow-xl overflow-x-hidden pb-20">
+<ion-content class="bg-white">
+  <main class="bg-white min-h-screen relative overflow-x-hidden pb-24">
     <nav class="absolute top-0 left-0 right-0 z-10 p-4 flex justify-between items-center">
-      <button (click)="goBack()" class="bg-white/90 p-2 rounded-full shadow-md backdrop-blur-sm">
+      <button (click)="goBack()" class="bg-white/95 p-3 rounded-full shadow-lg backdrop-blur-md active:scale-90 transition-transform">
         <ion-icon name="chevron-back-outline" class="text-xl"></ion-icon>
       </button>
       <h1 class="text-white font-semibold text-lg drop-shadow-md">Detalle del Comercio</h1>
-      <button class="bg-white/90 p-2 rounded-full shadow-md backdrop-blur-sm">
+      <button class="bg-white/95 p-3 rounded-full shadow-lg backdrop-blur-md active:scale-90 transition-transform">
         <ion-icon name="share-social-outline" class="text-xl text-slate-700"></ion-icon>
       </button>
     </nav>
@@ -49,9 +49,9 @@
     </section>
 
     <section class="px-6 py-4">
-      <button class="w-full bg-primary hover:bg-brand-dark transition-colors text-slate-900 font-bold py-4 rounded-custom flex items-center justify-center space-x-3 shadow-[0_4px_20px_-2px_rgba(13,242,204,0.15)]">
-        <ion-icon name="add-outline" class="text-2xl"></ion-icon>
-        <span>ACUMULAR PUNTOS</span>
+      <button class="w-full bg-primary hover:bg-brand-dark transition-all active:scale-95 text-slate-900 font-extrabold py-5 rounded-full flex items-center justify-center space-x-3 shadow-[0_8px_25px_-5px_rgba(13,242,204,0.4)] border-2 border-white/20">
+        <ion-icon name="qr-code-outline" class="text-2xl"></ion-icon>
+        <span class="tracking-tight">ACUMULAR PUNTOS</span>
       </button>
     </section>
 

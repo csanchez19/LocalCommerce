@@ -41,7 +41,22 @@
   --ion-background-color: #f8fafc;
 }
 
+@utility rounded-custom {
+  border-radius: 1.25rem;
+}
+
 body {
   font-family: 'Public Sans', sans-serif;
   background-color: var(--color-background);
+}
+
+/* Ensure the app stays centered and mobile-sized on larger screens */
+@media (min-width: 768px) {
+  ion-app {
+    max-width: 450px;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 0 50px rgba(0,0,0,0.1);
+    background: white;
+  }
 }

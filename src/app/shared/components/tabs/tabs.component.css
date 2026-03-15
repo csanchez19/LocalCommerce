@@ -13,6 +13,12 @@ ion-tab-button.tab-selected ion-label {
   color: #0df2cc;
   font-weight: bold;
 }
+ion-fab {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  margin: 0 !important;
+}
+
 .custom-fab {
   --background: #0df2cc;
   --background-activated: #0bcda8;
@@ -23,6 +29,9 @@ ion-tab-button.tab-selected ion-label {
   border-radius: 50%;
   width: 64px;
   height: 64px;
+  /* Removal of translateY as it might interfere with centering if not careful, 
+     but we'll keep it via transform if needed. 
+     Actually, let's merge the translate. */
   transform: translateY(-10px);
   animation: fab-pulse 2s infinite;
 }
