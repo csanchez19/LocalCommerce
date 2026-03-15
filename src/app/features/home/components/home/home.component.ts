@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonContent, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonIcon, IonChip } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { notificationsOutline, searchOutline, locationOutline, star, heartOutline } from 'ionicons/icons';
 import { RouterLink } from '@angular/router';
@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, IonContent, IonIcon, RouterLink],
+  imports: [CommonModule, IonContent, IonIcon, IonChip, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -49,5 +49,12 @@ export class HomeComponent {
 
   constructor() {
     addIcons({ notificationsOutline, searchOutline, locationOutline, star, heartOutline });
+  }
+
+  selectCategory(selectedCat: any) {
+    this.categories.update(cats => cats.map(cat => ({
+      ...cat,
+      active: cat.name === selectedCat.name
+    })));
   }
 }

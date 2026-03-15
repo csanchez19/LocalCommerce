@@ -8,3 +8,23 @@
 ion-content {
   --background: #f8fafc;
 }
+
+ion-chip {
+  --background: white;
+  --color: #64748b;
+  margin: 0;
+  border: 2px solid #f1f5f9;
+}
+
+ion-chip.active-chip {
+  --background: #0df2cc;
+  --color: #0f172a;
+  border-color: #0df2cc;
+  box-shadow: 0 4px 12px rgba(13, 242, 204, 0.3);
+  transform: scale(1.05);
+}
+
+ion-chip.inactive-chip:hover {
+  border-color: #0df2cc;
+  --color: #0df2cc;
+}

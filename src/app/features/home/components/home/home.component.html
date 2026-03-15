@@ -15,16 +15,16 @@
         <input class="w-full pl-12 pr-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-full focus:ring-4 focus:ring-primary/20 focus:bg-white focus:border-primary transition-all text-sm shadow-sm" placeholder="¿Qué estás buscando hoy?" type="text"/>
       </div>
 
-      <div class="flex space-x-3 overflow-x-auto hide-scrollbar pb-3 px-1">
+      <div class="flex space-x-2 overflow-x-auto hide-scrollbar pb-4 px-1">
         @for (cat of categories(); track cat.name) {
-          <button 
-            class="flex-shrink-0 px-6 py-2.5 font-bold rounded-full text-sm transition-all duration-300 border-2"
-            [ngClass]="cat.active 
-              ? 'bg-primary border-primary text-slate-900 shadow-lg scale-105' 
-              : 'bg-white border-slate-100 text-slate-500 hover:border-primary hover:text-primary'">
-            <span class="mr-2 text-base">{{ cat.icon }}</span>
-            {{ cat.name }}
-          </button>
+          <ion-chip 
+            (click)="selectCategory(cat)"
+            [outline]="!cat.active"
+            class="transition-all duration-300 font-bold px-4 py-6"
+            [ngClass]="cat.active ? 'active-chip' : 'inactive-chip'">
+            <span class="mr-2 text-lg">{{ cat.icon }}</span>
+            <ion-label>{{ cat.name }}</ion-label>
+          </ion-chip>
         }
       </div>
     </header>
