@@ -23,7 +23,7 @@
               </div>
             </div>
             <div class="text-right flex flex-col items-end">
-              <span class="font-bold text-slate-900 leading-tight">\${{ purchase.amount | number:'1.2-2' }}</span>
+              <span class="font-bold text-slate-900 leading-tight">{{ purchase.amount | currency:'EUR' }}</span>
               <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full mt-1">+{{ purchase.points }} pts</span>
             </div>
           </div>

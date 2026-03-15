@@ -1,0 +1,35 @@
+ion-content {
+  --background: #f8fafc;
+}
+
+.scanner-plane {
+  animation: scanning 2.5s ease-in-out infinite;
+}
+
+@keyframes scanning {
+  0% {
+    top: 5%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 95%;
+    opacity: 0;
+  }
+}
+
+ion-toolbar {
+  --background: #f8fafc;
+  --color: #1e293b;
+  font-weight: 700;
+}
+
+ion-title {
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
