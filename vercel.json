@@ -1,8 +1,6 @@
 {
   "version": 2,
-  "public": true,
-  "cleanUrls": true,
-  "outputDirectory": "dist/app/browser",
+  "outputDirectory": "dist/browser",
   "rewrites": [
     {
       "source": "/(.*)",

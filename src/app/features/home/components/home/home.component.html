@@ -20,7 +20,6 @@
           <ion-chip 
             (click)="selectCategory(cat)"
             [outline]="!cat.active"
-            class="transition-all duration-300 font-bold px-1"
             [ngClass]="cat.active ? 'active-chip' : 'inactive-chip'">
             <span class="text-md me-1">{{ cat.icon }}</span>
             <ion-label>{{ cat.name }}</ion-label>
